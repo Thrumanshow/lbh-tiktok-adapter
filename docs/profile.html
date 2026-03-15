@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLHQ — Solution Architect</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #0a0a0a;
+            color: #00ff41;
+            font-family: monospace;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 { font-size: 1.3em; border-bottom: 1px solid #00ff41; padding-bottom: 8px; margin-bottom: 16px; }
+        h2 { font-size: 1em; color: #00cc33; margin: 20px 0 8px; }
+        .badge-container { margin: 20px 0; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 16px 0;
+        }
+        .card {
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .card a {
+            color: #00ff41;
+            text-decoration: none;
+            font-size: 0.85em;
+        }
+        .card a:hover { color: #ffffff; }
+        .card .title { font-size: 0.7em; color: #006600; margin-bottom: 4px; }
+        .metric {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00ff41;
+        }
+        .tag {
+            display: inline-block;
+            border: 1px solid #00cc33;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 0.7em;
+            margin: 2px;
+            color: #00cc33;
+        }
+        .footer {
+            margin-top: 24px;
+            font-size: 0.75em;
+            color: #006600;
+            border-top: 1px solid #1a3a1a;
+            padding-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🐜 Cristhiam Leonardo Hernández Quiñonez</h1>
+    <p style="font-size:0.85em; color:#00cc33; margin-bottom:16px">
+        Solution Architect · LBH Protocol Author · El Salvador 🇸🇻
+    </p>
+
+    <!-- LinkedIn Badge -->
+    <div class="badge-container">
+        <div
+            class="badge-base LI-profile-badge"
+            data-locale="en_US"
+            data-size="medium"
+            data-theme="dark"
+            data-type="VERTICAL"
+            data-vanity="cristhiam-lbh-architect"
+            data-version="v1">
+        </div>
+        <script src="https://platform.linkedin.com/badges/js/profile.js"
+                async defer type="text/javascript"></script>
+    </div>
+
+    <h2>⚡ Key Metrics</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="title">BANDWIDTH REDUCTION</div>
+            <div class="metric">89.3%</div>
+            <div style="font-size:0.7em">JSON → LBH binary</div>
+        </div>
+        <div class="card">
+            <div class="title">PROTOCOL VERSIONS</div>
+            <div class="metric">v1.5</div>
+            <div style="font-size:0.7em">LBH-Net swarm</div>
+        </div>
+        <div class="card">
+            <div class="title">RFC DOCUMENTS</div>
+            <div class="metric">6</div>
+            <div style="font-size:0.7em">RFC-LBH-0001 → 0006</div>
+        </div>
+        <div class="card">
+            <div class="title">SCALE TARGET</div>
+            <div class="metric">1B</div>
+            <div style="font-size:0.7em">events/day</div>
+        </div>
+    </div>
+
+    <h2>🛠 Skills</h2>
+    <div>
+        <span class="tag">Distributed Systems</span>
+        <span class="tag">Binary Protocols</span>
+        <span class="tag">P2P Networks</span>
+        <span class="tag">Go</span>
+        <span class="tag">Python</span>
+        <span class="tag">Ed25519</span>
+        <span class="tag">SQLite</span>
+        <span class="tag">gRPC</span>
+        <span class="tag">REST</span>
+        <span class="tag">TCP/UDP</span>
+        <span class="tag">Edge Computing</span>
+        <span class="tag">E-commerce</span>
+    </div>
+
+    <h2>📦 Projects</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="title">TikTok E-commerce</div>
+            <a href="https://github.com/Thrumanshow/lbh-tiktok-adapter" target="_blank">
+                🐜 lbh-tiktok-adapter
+            </a>
+            <div style="font-size:0.7em; margin-top:4px">
+                Real-time order processing · 89.3% compression
+            </div>
+        </div>
+        <div class="card">
+            <div class="title">P2P Swarm Network</div>
+            <a href="https://github.com/HormigasAIS/LBH-Net" target="_blank">
+                🌐 LBH-Net v1.5.0
+            </a>
+            <div style="font-size:0.7em; margin-top:4px">
+                UDP discovery · Ed25519 · SQLite queue
+            </div>
+        </div>
+        <div class="card">
+            <div class="title">Airport UTM Protocol</div>
+            <a href="https://github.com/HormigasAIS/HormigasAIS-AirCity" target="_blank">
+                ✈️ HormigasAIS-AirCity
+            </a>
+            <div style="font-size:0.7em; margin-top:4px">
+                Sovereign drone authorization · 2027 target
+            </div>
+        </div>
+        <div class="card">
+            <div class="title">Microservice Go</div>
+            <a href="https://github.com/HormigasAIS/lbh-node-service" target="_blank">
+                ⚙️ lbh-node-service
+            </a>
+            <div style="font-size:0.7em; margin-top:4px">
+                REST + gRPC + SQLite · v0.2.0
+            </div>
+        </div>
+    </div>
+
+    <h2>🔗 Links</h2>
+    <div class="grid">
+        <div class="card">
+            <a href="https://github.com/HormigasAIS" target="_blank">
+                GitHub — HormigasAIS
+            </a>
+        </div>
+        <div class="card">
+            <a href="https://github.com/Thrumanshow" target="_blank">
+                GitHub — Thrumanshow
+            </a>
+        </div>
+        <div class="card">
+            <a href="https://zenodo.org/records/17767205" target="_blank">
+                DOI — LBH Protocol
+            </a>
+        </div>
+        <div class="card">
+            <a href="https://www.linkedin.com/in/cristhiam-lbh-architect/" target="_blank">
+                LinkedIn
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        Built from Termux · Android · San Miguel, El Salvador 2026 ·
+        CLHQ / HormigasAIS
+    </div>
+
+</body>
+</html>
