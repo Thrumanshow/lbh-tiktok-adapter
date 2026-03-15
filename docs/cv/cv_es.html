@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV — Cristhiam Leonardo Hernández Quiñonez</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0a0a0a; color: #00ff41; font-family: monospace; padding: 20px; max-width: 860px; margin: 0 auto; }
+        h1 { font-size: 1.4em; border-bottom: 2px solid #00ff41; padding-bottom: 8px; margin-bottom: 6px; }
+        .subtitle { font-size: 0.85em; color: #00cc33; margin-bottom: 12px; }
+        .contact { font-size: 0.78em; color: #00aa22; margin-bottom: 20px; line-height: 1.8; }
+        .contact a { color: #00ff41; text-decoration: none; }
+        h2 { font-size: 1em; color: #00ff41; border-left: 3px solid #00ff41; padding-left: 8px; margin: 24px 0 12px; }
+        h3 { font-size: 0.9em; color: #00cc33; margin: 16px 0 4px; }
+        .meta { font-size: 0.72em; color: #006600; margin-bottom: 8px; }
+        p { font-size: 0.82em; line-height: 1.6; margin-bottom: 8px; color: #00dd33; }
+        ul { padding-left: 16px; margin-bottom: 12px; }
+        li { font-size: 0.80em; line-height: 1.7; color: #00cc33; }
+        li strong { color: #00ff41; }
+        .skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+        .tag { border: 1px solid #00cc33; border-radius: 4px; padding: 2px 10px; font-size: 0.72em; color: #00cc33; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.78em; margin-bottom: 16px; }
+        th { background: #0d1f0d; color: #00cc33; padding: 6px 8px; text-align: left; border: 1px solid #1a3a1a; }
+        td { padding: 6px 8px; border: 1px solid #1a3a1a; color: #00cc33; }
+        .footer { margin-top: 28px; font-size: 0.72em; color: #006600; border-top: 1px solid #1a3a1a; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>🐜 Cristhiam Leonardo Hernández Quiñonez</h1>
+<p class="subtitle">Arquitecto de Soluciones · Autor del Protocolo LBH · El Salvador 🇸🇻</p>
+<div class="contact">
+    📧 chrisquionez354@gmail.com<br>
+    🔗 <a href="https://linkedin.com/in/cristhiam-lbh-architect">linkedin.com/in/cristhiam-lbh-architect</a><br>
+    🐙 <a href="https://github.com/HormigasAIS">github.com/HormigasAIS</a> · <a href="https://github.com/Thrumanshow">github.com/Thrumanshow</a><br>
+    🌐 <a href="https://thrumanshow.github.io/hormigasais-site/">thrumanshow.github.io/hormigasais-site/</a><br>
+    📄 DOI: <a href="https://zenodo.org/records/17767205">10.5281/zenodo.17767205</a>
+</div>
+
+<h2>Resumen</h2>
+<p>Arquitecto de soluciones independiente especializado en sistemas distribuidos, diseño de protocolos binarios e infraestructura de comercio electrónico en tiempo real. Autor del Protocolo LBH — una red mesh P2P soberana construida desde Termux en Android, El Salvador.</p>
+<p>Diseñé e implementé un adaptador de órdenes para TikTok E-commerce que logra <strong>89.3% de reducción de ancho de banda</strong> (150 bytes JSON → 16 bytes binario), capaz de procesar más de 1B eventos por día.</p>
+
+<h2>Habilidades Técnicas</h2>
+<div class="skills">
+    <span class="tag">Go</span><span class="tag">Python</span><span class="tag">JavaScript</span>
+    <span class="tag">gRPC</span><span class="tag">REST</span><span class="tag">TCP/UDP</span>
+    <span class="tag">LBH v1.1</span><span class="tag">SQLite</span><span class="tag">PostgreSQL</span>
+    <span class="tag">Ed25519</span><span class="tag">HMAC-SHA256</span><span class="tag">CRC-16</span>
+    <span class="tag">Docker</span><span class="tag">Sistemas Distribuidos</span>
+    <span class="tag">Redes P2P</span><span class="tag">Protocolos Binarios</span>
+    <span class="tag">Edge Computing</span><span class="tag">OpenAPI</span>
+</div>
+
+<h2>Proyectos</h2>
+
+<h3>lbh-tiktok-adapter — Adaptador de Protocolo TikTok E-commerce</h3>
+<p class="meta">2026 · <a href="https://github.com/Thrumanshow/lbh-tiktok-adapter">github.com/Thrumanshow/lbh-tiktok-adapter</a></p>
+<p>Adaptador de protocolo binario para procesamiento de órdenes TikTok. Transforma eventos JSON en feromonas LBH de 16 bytes con verificación de integridad CRC-16.</p>
+<ul>
+    <li><strong>89.3% de reducción de ancho de banda</strong> — 150 bytes → 16 bytes</li>
+    <li>A 1B eventos/día: 139 GB → 14.9 GB ahorrados diariamente</li>
+    <li>Bloqueo SQLite basado en reclamación — cero condiciones de carrera</li>
+    <li>Retry + backoff exponencial + dead-letter queue</li>
+    <li>RFC-LBH-0004 (Integridad de Datos) + RFC-LBH-0006 (Señales)</li>
+    <li>Arquitectura para Salesforce Commerce Cloud, Shopify, Channel Advisor</li>
+</ul>
+
+<h3>LBH-Net — Red Swarm P2P Soberana</h3>
+<p class="meta">2026 · <a href="https://github.com/HormigasAIS/LBH-Net">github.com/HormigasAIS/LBH-Net</a> · v1.5.0</p>
+<p>Red mesh P2P completa construida desde cero. Los nodos se descubren automáticamente via broadcast UDP sin Git, sin registro central, sin nube.</p>
+<ul>
+    <li>Autodescubrimiento UDP (puerto 9199) — nodos se unen solos</li>
+    <li>Servidor TCP (puerto 9200) — transporte en tiempo real</li>
+    <li>Identidad criptográfica Ed25519 por nodo</li>
+    <li>Cola SQLite + bloqueo de workers concurrentes</li>
+    <li>Heartbeat + autocura + retry + backoff + dead-letter queue</li>
+    <li>v0.1 → v1.5 en una sola sesión de desarrollo</li>
+</ul>
+
+<h3>lbh-node-service — Microservicio Go</h3>
+<p class="meta">2026 · <a href="https://github.com/HormigasAIS/lbh-node-service">github.com/HormigasAIS/lbh-node-service</a> · v0.2.0</p>
+<ul>
+    <li>REST API (Gin, puerto 8100) + gRPC (puerto 7100)</li>
+    <li>Persistencia SQLite via GORM · Bridge TCP CENTINELA_V24 (puerto 9001)</li>
+    <li>Tres nodos validados en vivo: A16-Soberano-Salvador, A20s-AirCity, CENTINELA-V24</li>
+</ul>
+
+<h3>HormigasAIS-AirCity — Protocolo UTM Aeroportuario</h3>
+<p class="meta">2026 · <a href="https://github.com/HormigasAIS/HormigasAIS-AirCity">github.com/HormigasAIS/HormigasAIS-AirCity</a></p>
+<ul>
+    <li>Autorización soberana de drones para gestión del espacio aéreo</li>
+    <li>Objetivo: Aeropuerto del Pacífico, El Salvador, 2027</li>
+    <li>Edge computing — sin dependencia de internet</li>
+</ul>
+
+<h3>Protocolo LBH — Protocolo Soberano Abierto</h3>
+<p class="meta">2025-2026 · DOI: <a href="https://zenodo.org/records/17767205">10.5281/zenodo.17767205</a></p>
+<ul>
+    <li>RFC-LBH-0001 al RFC-LBH-0006 completamente documentados</li>
+    <li>RFC-LBH-0004: Integridad de datos · RFC-LBH-0006: Estándar de señales</li>
+    <li>Publicado con certificación DOI académico</li>
+</ul>
+
+<h2>Ecosistema de Protocolos</h2>
+<table>
+    <tr><th>Repositorio</th><th>Rol</th><th>Estado</th></tr>
+    <tr><td>LBH-Net</td><td>Red swarm P2P</td><td>v1.5.0 ✅</td></tr>
+    <tr><td>lbh-node-service</td><td>Microservicio Go</td><td>v0.2.0 ✅</td></tr>
+    <tr><td>lbh-tiktok-adapter</td><td>Adaptador e-commerce</td><td>v1.0 ✅</td></tr>
+    <tr><td>HormigasAIS-AirCity</td><td>UTM aeroportuario</td><td>En desarrollo</td></tr>
+    <tr><td>LBH-Protocol</td><td>Especificaciones RFC</td><td>DOI certificado ✅</td></tr>
+    <tr><td>lbh-image-validator</td><td>Validador PI</td><td>v0.1.0 ✅</td></tr>
+</table>
+
+<h2>Formación y Credenciales</h2>
+<ul>
+    <li><strong>Protocolo LBH</strong> — DOI: 10.5281/zenodo.17767205 (Zenodo, 2026)</li>
+    <li>Arquitectura autodidacta — construida desde Android/Termux</li>
+    <li>Idiomas: Español (nativo), Inglés (profesional)</li>
+</ul>
+
+<div class="footer">
+    San Miguel, El Salvador · Marzo 2026 · CLHQ / HormigasAIS ·
+    <a href="https://zenodo.org/records/17767205" style="color:#006600">DOI: 10.5281/zenodo.17767205</a>
+</div>
+
+</body>
+</html>
