@@ -1,0 +1,7 @@
+nohup: ignoring input
+
+════════════════════════════════════════
+  🐜 HORMIGASAIS - INTERFAZ DE SOBERANÍA
+════════════════════════════════════════
+🔗 URL o ID del Video TikTok: 
+❌ Error en el protocolo: [Errno 9] Bad file descriptor
