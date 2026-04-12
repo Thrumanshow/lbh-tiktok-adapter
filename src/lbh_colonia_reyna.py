@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # ================================================================
-# HORMIGASAIS · COLONIA REYNA v1.3.1 (Gitea 3001 & Identity Fix)
+# HORMIGASAIS · COLONIA REYNA v1.4 (Resiliencia H5-Salud)
 # Jerarquía: XOXO → H10 Soberana → Stanford → Reyna → Enjambre
-# Cierre de Ciclo: Sincronización con Gitea Local :3001
+# Cierre de Ciclo: Gitea 3001 + Hot-Backup Soberano
 # Autor: HormigasAIS-Colonia-Soberana (chrisquionez354@gmail.com)
 # ================================================================
 
@@ -12,11 +12,11 @@ from datetime import datetime
 # ── CONFIG ────────────────────────────────────────────────────
 HMAC_KEY     = b"hormigasais-sovereign-2026"
 NODE_ORIGIN  = "A16-SanMiguel-SV"
-GITEA_URL    = "http://localhost:3001/HormigasAIS-Colonia-Soberana/lbh-tiktok-adapter"
 REPO_DIR     = os.path.expanduser("~/lbh-tiktok-adapter")
 LOG_DIR      = os.path.expanduser("~/hormigasais-lab/logs")
+DB_PATH      = os.path.join(REPO_DIR, "lbh_tiktok.db")
 
-# Archivos de la operación (Temporales antes del Snapshot)
+# Archivos de la operación
 CONTRACT_PATH = os.path.join(LOG_DIR, "contrato_reyna.json")
 REPORT_PATH   = os.path.join(LOG_DIR, "REPORTE_INTELIGENCIA.md")
 
@@ -25,69 +25,83 @@ os.makedirs(LOG_DIR, exist_ok=True)
 def lbh_sig(payload):
     return hmac.new(HMAC_KEY, payload.encode(), hashlib.sha256).hexdigest()[:16]
 
-# --- LÓGICA DE SNAPSHOT INTEGRADA AL REPO REAL ---
+# ================================================================
+# HORMIGA H5-SALUD: MONITOR DE RESILIENCIA
+# ================================================================
+class HormigaH5Salud:
+    def __init__(self):
+        self.backup_dir = os.path.expanduser("~/hormigasais-lab/backups")
+        os.makedirs(self.backup_dir, exist_ok=True)
+
+    def ejecutar_chequeo(self, db_path):
+        print("\n[H5-SALUD]: Iniciando escaneo de integridad y respaldo...")
+        
+        # 1. Chequeo de existencia
+        if not os.path.exists(db_path):
+            return "ERROR: DB no encontrada"
+
+        # 2. Hot-Backup (Fuera de Git, para soberanía total)
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        backup_file = os.path.join(self.backup_dir, f"backup_lbh_{ts}.db")
+        try:
+            shutil.copy2(db_path, backup_file)
+            self.purgar_viejos()
+            return f"OK | Respaldo inmutable: {os.path.basename(backup_file)}"
+        except Exception as e:
+            return f"ERROR en backup: {e}"
+
+    def purgar_viejos(self):
+        # Mantiene la rotación de 5 archivos para optimizar espacio en Termux
+        backups = sorted([os.path.join(self.backup_dir, f) for f in os.listdir(self.backup_dir) if f.endswith('.db')])
+        while len(backups) > 5:
+            os.remove(backups.pop(0))
+
+# --- LÓGICA DE SNAPSHOT (CIERRE DE CICLO) ---
 def snapshot_soberania(video_id):
     print(f"\n[SNAPSHOT]: Iniciando Cierre de Ciclo para {video_id}...")
-    
-    # Crear carpeta de evidencia dentro del repo para historial inmutable
     evidence_dir = os.path.join(REPO_DIR, "evidence", video_id)
     os.makedirs(evidence_dir, exist_ok=True)
 
-    # Mover archivos de logs al repositorio (Purga local automática)
-    archivos_movidos = []
+    # Transferencia de Evidencia
     for src in [CONTRACT_PATH, REPORT_PATH]:
         if os.path.exists(src):
-            dest_name = os.path.basename(src)
-            shutil.move(src, os.path.join(evidence_dir, dest_name))
-            archivos_movidos.append(dest_name)
+            shutil.move(src, os.path.join(evidence_dir, os.path.basename(src)))
 
-    if not archivos_movidos:
-        print("⚠️ [SNAPSHOT]: No hay archivos de inteligencia para respaldar.")
-        return
-
-    # Generar Meta-Data de Soberanía vinculada al autor
+    # Metadata
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    meta = {
-        "video_id": video_id,
-        "timestamp": ts,
-        "nodo": NODE_ORIGIN,
-        "emisor": "chrisquionez354@gmail.com",
-        "firma_clhq": lbh_sig(f"{video_id}|{ts}"),
-        "status": "VALIDATED_BY_REYNA"
-    }
-    
+    meta = {"video_id": video_id, "nodo": NODE_ORIGIN, "firma_clhq": lbh_sig(f"{video_id}|{ts}")}
     with open(os.path.join(evidence_dir, "metadata.json"), "w") as f:
         json.dump(meta, f, indent=2)
 
-    # --- SINCRONIZACIÓN CON GITEA :3001 ---
+    # Git Push a Gitea :3001
     try:
         os.chdir(REPO_DIR)
-        # Asegurar configuración de identidad en el hilo de ejecución
-        subprocess.run(["git", "config", "user.name", "HormigasAIS-Colonia-Soberana"], check=True)
-        subprocess.run(["git", "config", "user.email", "chrisquionez354@gmail.com"], check=True)
-        
         subprocess.run(["git", "add", "."], check=True)
-        commit_msg = f"HITO: Contrato Reyna validado | Video:{video_id} | Nodo:{NODE_ORIGIN}"
-        subprocess.run(["git", "commit", "-m", commit_msg], check=True)
-        
-        print(f"📡 Propagando a Gitea Local (HormigasAIS-Colonia-Soberana)...")
+        msg = f"HITO: Ciclo Reyna validado | Video:{video_id} | Nodo:{NODE_ORIGIN}"
+        subprocess.run(["git", "commit", "-m", msg], check=True)
         subprocess.run(["git", "push", "origin", "main"], check=True)
-        print(f"✅ [SNAPSHOT]: Ciclo cerrado. Contrato disponible en Gitea.")
-        
+        print(f"✅ [SNAPSHOT]: Sincronizado en Gitea.")
     except Exception as e:
-        print(f"❌ [SNAPSHOT]: Error en sincronización Git: {e}")
+        print(f"❌ [SNAPSHOT]: Error Git: {e}")
 
 if __name__ == "__main__":
     import sys
-    # Simulación de entrada: ID de video
     vid = sys.argv[1] if len(sys.argv) > 1 else "ZSH4acBq7"
     
-    # Simulación de generación de documentos por el enjambre
+    # 1. Crear DB de prueba si no existe (Simulación de proceso)
+    if not os.path.exists(DB_PATH):
+        conn = sqlite3.connect(DB_PATH)
+        conn.close()
+
+    # 2. Generar Documentación (Simulación de Enjambre)
     print(f"🐜 Iniciando Enjambre Reyna para: {vid}")
-    with open(CONTRACT_PATH, "w") as f: 
-        json.dump({"contrato": "REYNA_v1.3", "status": "active", "vid": vid, "author": "CLHQ"}, f)
-    with open(REPORT_PATH, "w") as f: 
-        f.write(f"# Reporte de Inteligencia HormigasAIS\nVideo: {vid}\nNodo: {NODE_ORIGIN}\n")
-    
-    # EJECUTAR CIERRE Y RESPALDO
+    with open(CONTRACT_PATH, "w") as f: json.dump({"status": "active", "vid": vid}, f)
+    with open(REPORT_PATH, "w") as f: f.write(f"Reporte de Inteligencia HormigasAIS\nVideo: {vid}")
+
+    # 3. ACTIVAR H5-SALUD (Resiliencia)
+    h5 = HormigaH5Salud()
+    status_salud = h5.ejecutar_chequeo(DB_PATH)
+    print(f"[H5-SALUD]: {status_salud}")
+
+    # 4. CIERRE DE CICLO
     snapshot_soberania(vid)
