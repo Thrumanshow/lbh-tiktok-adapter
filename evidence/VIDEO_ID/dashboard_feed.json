@@ -1,0 +1,16 @@
+{
+  "video_id": "VIDEO_ID",
+  "timestamp": "2026-04-12 00:17:16.781226",
+  "marketing": {
+    "views_est": 15000,
+    "engagement": "8.5%",
+    "roi_potencial": "High"
+  },
+  "finanzas": {
+    "costo_operativo_usd": 0.004,
+    "valor_dato_lbh": 0.15
+  },
+  "salud": "OK | Backup: backup_lbh_20260412_001716.db",
+  "sello": "72e5c0c28196a41e",
+  "nodo": "A16-SanMiguel-SV"
+}
