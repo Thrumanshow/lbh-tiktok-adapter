@@ -1,0 +1,16 @@
+{
+  "video_id": "VIRAL_1204_0040",
+  "timestamp": "2026-04-12 00:40:24.372247",
+  "marketing": {
+    "views_est": 15000,
+    "engagement": "8.5%",
+    "roi_potencial": "High"
+  },
+  "finanzas": {
+    "costo_operativo_usd": 0.004,
+    "valor_dato_lbh": 0.15
+  },
+  "salud": "OK | Backup: backup_lbh_20260412_004024.db",
+  "sello": "dad2d87e2d28cdc0",
+  "nodo": "A16-SanMiguel-SV"
+}
