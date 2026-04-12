@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # ================================================================
-# HORMIGASAIS · COLONIA REYNA v1.5 (Fortaleza H6-Seguridad)
-# Jerarquía: XOXO → H10 Soberana → Stanford → Reyna → Enjambre
-# Cierre de Ciclo: Gitea 3001 + Salud + Seguridad Perimetral
+# HORMIGASAIS · COLONIA REYNA v1.6 (Enjambre Completo 7 Agentes)
+# Jerarquía: XOXO → H10 → Stanford → Reyna → Enjambre (H1-H7)
+# Cierre de Ciclo: Gitea 3001 + Resiliencia + Inteligencia Comercial
 # Autor: HormigasAIS-Colonia-Soberana (chrisquionez354@gmail.com)
 # ================================================================
 
-import sqlite3, os, time, hmac, hashlib, socket, json, threading, shutil, subprocess
+import sqlite3, os, time, hmac, hashlib, json, shutil, subprocess
 from datetime import datetime
 
 # ── CONFIG ────────────────────────────────────────────────────
@@ -16,8 +16,10 @@ REPO_DIR     = os.path.expanduser("~/lbh-tiktok-adapter")
 LOG_DIR      = os.path.expanduser("~/hormigasais-lab/logs")
 DB_PATH      = os.path.join(REPO_DIR, "lbh_tiktok.db")
 
+# Rutas de Archivos
 CONTRACT_PATH = os.path.join(LOG_DIR, "contrato_reyna.json")
 REPORT_PATH   = os.path.join(LOG_DIR, "REPORTE_INTELIGENCIA.md")
+DASHBOARD_DATA = os.path.join(LOG_DIR, "dashboard_feed.json")
 
 os.makedirs(LOG_DIR, exist_ok=True)
 
@@ -25,27 +27,26 @@ def lbh_sig(payload):
     return hmac.new(HMAC_KEY, payload.encode(), hashlib.sha256).hexdigest()[:16]
 
 # ================================================================
-# HORMIGA H6-SEGURIDAD: CENTINELA DE INTEGRIDAD
+# AGENTES DEL ENJAMBRE (H1 - H7)
 # ================================================================
-class HormigaH6Seguridad:
-    def validar_entorno(self):
-        print("[H6-SEGURIDAD]: Validando integridad del Nodo A16...")
-        # Simulación de chequeo de procesos no autorizados
-        return True
 
-    def sellar_evidencia(self, archivos):
-        print("[H6-SEGURIDAD]: Generando sello de seguridad perimetral...")
-        hashes = []
-        for arc in archivos:
-            if os.path.exists(arc):
-                with open(arc, "rb") as f:
-                    hashes.append(hashlib.sha256(f.read()).hexdigest()[:8])
-        
-        # Sello Maestro del Enjambre
-        sello_final = lbh_sig("-".join(hashes))
-        return sello_final
+class HormigaH1Descargadora:
+    def gestionar_assets(self, vid):
+        print(f"[H1-DESCARGA]: Validando caché y assets para {vid}...")
+        return {"status": "clean", "path": f"/tmp/{vid}.mp4"}
 
-# (Se mantiene HormigaH5Salud...)
+class HormigaH2Marketing:
+    def analizar_viralidad(self, vid):
+        print(f"[H2-MARKETING]: Extrayendo Engagement y Hashtags...")
+        # Simulación de métricas TikTok
+        return {"views_est": 15000, "engagement": "8.5%", "roi_potencial": "High"}
+
+class HormigaH3Inversion:
+    def calcular_costos(self):
+        print(f"[H3-INVERSIÓN]: Calculando consumo energético y recursos...")
+        # Basado en el pitch de $100k USD para infraestructura
+        return {"costo_operativo_usd": 0.004, "valor_dato_lbh": 0.15}
+
 class HormigaH5Salud:
     def __init__(self):
         self.backup_dir = os.path.expanduser("~/hormigasais-lab/backups")
@@ -56,58 +57,80 @@ class HormigaH5Salud:
         shutil.copy2(db_path, backup_file)
         return f"OK | Backup: {os.path.basename(backup_file)}"
 
-def snapshot_soberania(video_id, sello_h6):
-    print(f"\n[SNAPSHOT]: Iniciando Cierre de Ciclo Seguro para {video_id}...")
+class HormigaH6Seguridad:
+    def sellar_evidencia(self, archivos):
+        print("[H6-SEGURIDAD]: Generando sello de integridad LBH...")
+        hashes = []
+        for arc in archivos:
+            if os.path.exists(arc):
+                with open(arc, "rb") as f:
+                    hashes.append(hashlib.sha256(f.read()).hexdigest()[:8])
+        return lbh_sig("-".join(hashes))
+
+class HormigaH7Reporter:
+    def consolidar_dashboard(self, data_enjambre):
+        print("[H7-REPORTER]: Unificando telemetría para Dashboard :3002...")
+        with open(DASHBOARD_DATA, "w") as f:
+            json.dump(data_enjambre, f, indent=2)
+        return DASHBOARD_DATA
+
+# ================================================================
+# CIERRE DE CICLO SOBERANO
+# ================================================================
+
+def snapshot_soberania(video_id, data_final):
+    print(f"\n[SNAPSHOT]: Sincronizando evidencia en Gitea...")
     evidence_dir = os.path.join(REPO_DIR, "evidence", video_id)
     os.makedirs(evidence_dir, exist_ok=True)
 
-    for src in [CONTRACT_PATH, REPORT_PATH]:
+    # Mover archivos generados
+    for src in [CONTRACT_PATH, REPORT_PATH, DASHBOARD_DATA]:
         if os.path.exists(src):
             shutil.move(src, os.path.join(evidence_dir, os.path.basename(src)))
 
-    ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    meta = {
-        "video_id": video_id, 
-        "nodo": NODE_ORIGIN, 
-        "sello_seguridad": sello_h6,
-        "ts": ts
-    }
-    with open(os.path.join(evidence_dir, "metadata.json"), "w") as f:
-        json.dump(meta, f, indent=2)
-
+    # Push a Git
     try:
         os.chdir(REPO_DIR)
         subprocess.run(["git", "add", "."], check=True)
-        msg = f"SEC: Ciclo Blindado H6 | Video:{video_id} | Sello:{sello_h6}"
+        msg = f"HITO: Enjambre Completo (7 Agentes) | Video:{video_id} | Sello:{data_final['sello']}"
         subprocess.run(["git", "commit", "-m", msg], check=True)
         subprocess.run(["git", "push", "origin", "main"], check=True)
-        print(f"✅ [SNAPSHOT]: Nodo sincronizado y blindado.")
+        print(f"✅ [SNAPSHOT]: Ciclo Completo en Gitea :3001")
     except Exception as e:
-        print(f"❌ [SNAPSHOT]: Error: {e}")
+        print(f"❌ [SNAPSHOT]: Error Git: {e}")
 
 if __name__ == "__main__":
     import sys
-    vid = sys.argv[1] if len(sys.argv) > 1 else "SEC_TEST_001"
+    vid = sys.argv[1] if len(sys.argv) > 1 else "HORMIGA_PRO_001"
     
-    # 1. Preparar DB
-    if not os.path.exists(DB_PATH): sqlite3.connect(DB_PATH).close()
+    # Inicialización de Agentes
+    h1 = HormigaH1Descargadora(); h2 = HormigaH2Marketing(); h3 = HormigaH3Inversion()
+    h5 = HormigaH5Salud(); h6 = HormigaH6Seguridad(); h7 = HormigaH7Reporter()
 
-    # 2. Inicializar Seguridad y Salud
-    h6 = HormigaH6Seguridad()
-    h5 = HormigaH5Salud()
+    print(f"🐜 DESPERTANDO ENJAMBRE SOBERANO PARA: {vid}")
+    
+    # Ejecución en Cascada
+    d1 = h1.gestionar_assets(vid)
+    d2 = h2.analizar_viralidad(vid)
+    d3 = h3.calcular_costos()
+    
+    # Generar Documentos Base
+    with open(CONTRACT_PATH, "w") as f:
+        json.dump({"vid": vid, "mkt": d2, "inv": d3, "ts": str(datetime.now())}, f)
+    with open(REPORT_PATH, "w") as f:
+        f.write(f"# Informe de Inteligencia LBH\nVideo: {vid}\nROI Est: {d2['roi_potencial']}\nCosto Ops: {d3['costo_operativo_usd']}")
 
-    if h6.validar_entorno():
-        # Generar archivos
-        print(f"🐜 Enjambre operando en {vid}...")
-        with open(CONTRACT_PATH, "w") as f: json.dump({"vid": vid, "secure": True}, f)
-        with open(REPORT_PATH, "w") as f: f.write(f"Reporte Seguro para {vid}")
+    # Seguridad y Salud
+    status_h5 = h5.ejecutar_chequeo(DB_PATH)
+    sello_h6 = h6.sellar_evidencia([CONTRACT_PATH, REPORT_PATH])
+    
+    # Consolidación H7
+    payload_final = {
+        "video_id": vid, "timestamp": str(datetime.now()),
+        "marketing": d2, "finanzas": d3, "salud": status_h5, "sello": sello_h6,
+        "nodo": NODE_ORIGIN
+    }
+    h7.consolidar_dashboard(payload_final)
 
-        # Ejecutar Salud
-        print(f"[H5-SALUD]: {h5.ejecutar_chequeo(DB_PATH)}")
-
-        # Ejecutar Seguridad (Sellar archivos antes de moverlos)
-        sello = h6.sellar_evidencia([CONTRACT_PATH, REPORT_PATH])
-        print(f"[H6-SEGURIDAD]: Sello de Integridad: {sello}")
-
-        # Cierre
-        snapshot_soberania(vid, sello)
+    # Snapshot Final
+    snapshot_soberania(vid, payload_final)

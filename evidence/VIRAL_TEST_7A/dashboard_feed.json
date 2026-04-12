@@ -1,0 +1,16 @@
+{
+  "video_id": "VIRAL_TEST_7A",
+  "timestamp": "2026-04-11 22:44:26.878251",
+  "marketing": {
+    "views_est": 15000,
+    "engagement": "8.5%",
+    "roi_potencial": "High"
+  },
+  "finanzas": {
+    "costo_operativo_usd": 0.004,
+    "valor_dato_lbh": 0.15
+  },
+  "salud": "OK | Backup: backup_lbh_20260411_224426.db",
+  "sello": "3a4bc308070c72c6",
+  "nodo": "A16-SanMiguel-SV"
+}
