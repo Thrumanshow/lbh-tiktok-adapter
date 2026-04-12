@@ -89,19 +89,19 @@ def snapshot_soberania(video_id, data_final):
             shutil.move(src, os.path.join(evidence_dir, os.path.basename(src)))
 
     # Push a Git
-    try:
-        os.chdir(REPO_DIR)
-        subprocess.run(["git", "add", "."], check=True)
-        msg = f"HITO: Enjambre Completo (7 Agentes) | Video:{video_id} | Sello:{data_final['sello']}"
-        subprocess.run(["git", "commit", "-m", msg], check=True)
-        subprocess.run(["git", "push", "origin", "main"], check=True)
-        print(f"✅ [SNAPSHOT]: Ciclo Completo en Gitea :3001")
-    except Exception as e:
-        print(f"❌ [SNAPSHOT]: Error Git: {e}")
+    import subprocess
+import os
 
-if __name__ == "__main__":
-    import sys
-    vid = sys.argv[1] if len(sys.argv) > 1 else "HORMIGA_PRO_001"
+print("[SNAPSHOT]: Ejecutando sincronización soberana...")
+
+try:
+    subprocess.run(
+        ["bash", os.path.expanduser("~/lbh-tiktok-adapter/sync_mirror.sh")],
+        check=True
+    )
+    print("✅ [SNAPSHOT]: Sync completo (Gitea + GitHub inteligente)")
+except Exception as e:
+    print(f"⚠️ [SNAPSHOT]: Error en sync: {e}")
     
     # Inicialización de Agentes
     h1 = HormigaH1Descargadora(); h2 = HormigaH2Marketing(); h3 = HormigaH3Inversion()
