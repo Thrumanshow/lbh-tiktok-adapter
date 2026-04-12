@@ -1,6 +1,6 @@
 {
   "video_id": "VINCULACION_EXITOSA_A16",
-  "timestamp": "2026-04-11 23:00:23.105301",
+  "timestamp": "2026-04-11 23:32:10.191990",
   "marketing": {
     "views_est": 15000,
     "engagement": "8.5%",
@@ -10,7 +10,7 @@
     "costo_operativo_usd": 0.004,
     "valor_dato_lbh": 0.15
   },
-  "salud": "OK | Backup: backup_lbh_20260411_230023.db",
-  "sello": "19465b9b2726653a",
+  "salud": "OK | Backup: backup_lbh_20260411_233210.db",
+  "sello": "d779271639b85cd7",
   "nodo": "A16-SanMiguel-SV"
 }
