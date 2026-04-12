@@ -76,7 +76,7 @@ def calcular_score(metricas):
     for key, val in metricas.items():
         peso = PESOS.get(key, 1.0)
         score += val * peso
-    return min(999, max(1, int(score / 100)))
+    return min(999, max(1, int(score / 5)))
 
 def clasificar(score):
     if score >= 900: return "MEGAVIRAL", 3
@@ -304,6 +304,8 @@ def modo_interactivo():
     print(f"  {'Campo':10} {'Actual':>8} → {'Objetivo':>8}  {'Δ':>8}  %")
     print("  " + "-" * 50)
     for campo, d in objetivos.items():
+        if campo == "purchases" and d["actual"] == 0 and d["objetivo"] == 0:
+            continue
         print(f"  {campo:10} {d['actual']:>8,} → {d['objetivo']:>8,}  "
               f"+{d['delta']:>7,}  {d['pct']}%")
 
