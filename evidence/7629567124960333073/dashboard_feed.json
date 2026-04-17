@@ -1,6 +1,6 @@
 {
   "video_id": "7629567124960333073",
-  "timestamp": "2026-04-16 23:10:31.982548",
+  "timestamp": "2026-04-16 23:38:14.920408",
   "marketing": {
     "views_est": 15000,
     "engagement": "8.5%",
@@ -10,7 +10,7 @@
     "costo_operativo_usd": 0.004,
     "valor_dato_lbh": 0.15
   },
-  "salud": "OK | Backup: backup_lbh_20260416_231031.db",
-  "sello": "92d28ad20a4f29c1",
+  "salud": "OK | Backup: backup_lbh_20260416_233814.db",
+  "sello": "7fdcabf5f5bce5e5",
   "nodo": "A16-SanMiguel-SV"
 }

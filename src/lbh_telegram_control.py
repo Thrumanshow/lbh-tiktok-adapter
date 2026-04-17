@@ -58,14 +58,25 @@ def handle(chat_id, text):
     if raw_text.startswith("/h9"):
         user_states.pop(chat_id, None)
         try:
-            url = raw_text.split(" ")[1]
+            parts = raw_text.split(" ")
+            if len(parts) < 2:
+                send("⚠️ Formato incorrecto. Use: `/h9 [URL]`")
+                return
+            
+            url = parts[1]
             h9_path = os.path.expanduser("~/lbh-tiktok-adapter/src/lbh_h9_orquestador.py")
-            subprocess.Popen(["python3", h9_path, url])
-            send(f"🧬 *[H9-AUTÓNOMO]*\nNodo `{NODE_ID}` activado.\n🔗 URL: {url}\n\n_Procesando feromonas..._")
+            
+            # BLOQUE CORREGIDO: Usamos run() para pausar la Reyna y capturar el teclado
+            send(f"🧬 *[H9-AUTÓNOMO]*\nNodo `{NODE_ID}` activado.\n🔗 URL: {url}\n\n_Esperando entrada de datos en terminal..._")
+            
+            # Esto detiene la ejecución del bot hasta que termines en Termux
+            subprocess.run(["python3", h9_path, url])
+            
+            send("✅ *Misión Finalizada.* Use `/auditar [ID]` para procesar el ingreso.")
             return
         except Exception as e:
             send(f"⚠️ Error H9: {str(e)}")
-            return 
+            return
 
     # 💼 COMANDOS H10 (Contabilidad y Auditoría)
     if cmd == "/balance":
