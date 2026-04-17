@@ -5,6 +5,12 @@ cd ~/lbh-tiktok-adapter || exit 1
 echo "🐜 Sincronizando LBH TikTok Adapter..."
 
 # ─────────────────────────────────────────────
+# SINCRONIZAR ESTADO REMOTO (ANTI-CONFLICTOS)
+# ─────────────────────────────────────────────
+git fetch origin >/dev/null 2>&1
+git fetch github >/dev/null 2>&1
+
+# ─────────────────────────────────────────────
 # DETECTAR CAMBIOS REALES (ANTI-RUIDO AVANZADO)
 # ─────────────────────────────────────────────
 # Verificar si hay commits pendientes hacia origin

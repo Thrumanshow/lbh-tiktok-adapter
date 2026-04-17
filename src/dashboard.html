@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HormigasAIS - Monitor A16</title>
+    <meta charset="UTF-8">
+    <style>
+        body { background: #0a0a0a; color: #00ff88; font-family: monospace; padding: 20px; }
+        .card { border: 1px solid #00ff88; padding: 15px; margin-bottom: 10px; background: #111; box-shadow: 0 0 10px rgba(0,255,136,0.2); }
+        .header { border-bottom: 2px solid #00ff88; padding-bottom: 10px; margin-bottom: 20px; }
+        .blob { color: #888; word-break: break-all; font-size: 0.9em; background: #000; padding: 5px; border-radius: 3px; }
+        .status { color: #ff6600; font-weight: bold; }
+        .meta { color: #00ccff; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐜 HORMIGASAIS | NODO A16</h1>
+        <p>San Miguel, El Salvador - Monitor de Enjambre v2.0</p>
+    </div>
+    <div id="stats" class="card">📡 Sincronizando con el bus de datos...</div>
+    <div id="evidencia" class="card">
+        <h3>🚀 ÚLTIMA FEROMONA DETECTADA</h3>
+        <div id="data">Esperando nueva señal...</div>
+    </div>
+    <script>
+        async function update() {
+            try {
+                // Actualizar Stats
+                const resStats = await fetch('/api/database/stats');
+                const dStats = await resStats.json();
+                document.getElementById('stats').innerHTML = `📊 Señales en Enjambre: ${dStats.registros_enjambre || 0} | Estado: ${dStats.db_status}`;
+
+                // Actualizar Evidencia
+                const resEv = await fetch('/api/evidencia/latest');
+                const dEv = await resEv.json();
+                document.getElementById('data').innerHTML = `
+                    <p class="meta"><b>ORIGEN:</b> ${dEv.video_id}</p>
+                    <p><b>PROTOCOLO:</b> ${dEv.protocolo}</p>
+                    <p><b>ADN LBH:</b></p>
+                    <p class="blob">${dEv.lbh_payload}</p>
+                    <p class="status">● ${dEv.status}</p>
+                `;
+            } catch (e) { console.error("Error de bus:", e); }
+        }
+        setInterval(update, 2000); // Actualización cada 2 segundos
+        update();
+    </script>
+</body>
+</html>

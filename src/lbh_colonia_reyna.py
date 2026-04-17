@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # ================================================================
-# HORMIGASAIS · COLONIA REYNA v1.6 (Enjambre Completo 7 Agentes)
+# HORMIGASAIS · COLONIA REYNA v1.6.1 (REPARADO)
 # Jerarquía: XOXO → H10 → Stanford → Reyna → Enjambre (H1-H7)
 # Cierre de Ciclo: Gitea 3001 + Resiliencia + Inteligencia Comercial
 # Autor: HormigasAIS-Colonia-Soberana (chrisquionez354@gmail.com)
@@ -13,7 +13,7 @@ from datetime import datetime
 HMAC_KEY     = b"hormigasais-sovereign-2026"
 NODE_ORIGIN  = "A16-SanMiguel-SV"
 REPO_DIR     = os.path.expanduser("~/lbh-tiktok-adapter")
-LOG_DIR      = os.path.expanduser("~/hormigasais-lab/logs")
+LOG_DIR       = os.path.expanduser("~/hormigasais-lab/logs")
 DB_PATH      = os.path.join(REPO_DIR, "lbh_tiktok.db")
 
 # Rutas de Archivos
@@ -38,13 +38,11 @@ class HormigaH1Descargadora:
 class HormigaH2Marketing:
     def analizar_viralidad(self, vid):
         print(f"[H2-MARKETING]: Extrayendo Engagement y Hashtags...")
-        # Simulación de métricas TikTok
         return {"views_est": 15000, "engagement": "8.5%", "roi_potencial": "High"}
 
 class HormigaH3Inversion:
     def calcular_costos(self):
         print(f"[H3-INVERSIÓN]: Calculando consumo energético y recursos...")
-        # Basado en el pitch de $100k USD para infraestructura
         return {"costo_operativo_usd": 0.004, "valor_dato_lbh": 0.15}
 
 class HormigaH5Salud:
@@ -54,8 +52,10 @@ class HormigaH5Salud:
     def ejecutar_chequeo(self, db_path):
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         backup_file = os.path.join(self.backup_dir, f"backup_lbh_{ts}.db")
-        shutil.copy2(db_path, backup_file)
-        return f"OK | Backup: {os.path.basename(backup_file)}"
+        if os.path.exists(db_path):
+            shutil.copy2(db_path, backup_file)
+            return f"OK | Backup: {os.path.basename(backup_file)}"
+        return "OK | Esperando primera transacción"
 
 class HormigaH6Seguridad:
     def sellar_evidencia(self, archivos):
@@ -75,7 +75,7 @@ class HormigaH7Reporter:
         return DASHBOARD_DATA
 
 # ================================================================
-# CIERRE DE CICLO SOBERANO
+# CIERRE DE CICLO SOBERANO (REPARADO)
 # ================================================================
 
 def snapshot_soberania(video_id, data_final):
@@ -88,49 +88,59 @@ def snapshot_soberania(video_id, data_final):
         if os.path.exists(src):
             shutil.move(src, os.path.join(evidence_dir, os.path.basename(src)))
 
-    # Push a Git
-    import subprocess
-import os
+    # Ejecución del Sync SOBERANO
+    print("[SNAPSHOT]: Ejecutando sincronización soberana...")
+    try:
+        subprocess.run(
+            ["bash", os.path.expanduser("~/lbh-tiktok-adapter/sync_mirror.sh")],
+            check=True
+        )
+        print("✅ [SNAPSHOT]: Sync completo (Gitea + GitHub inteligente)")
+    except Exception as e:
+        print(f"⚠️ [SNAPSHOT]: Error en sync: {e}")
 
-print("[SNAPSHOT]: Ejecutando sincronización soberana...")
-
-try:
-    subprocess.run(
-        ["bash", os.path.expanduser("~/lbh-tiktok-adapter/sync_mirror.sh")],
-        check=True
-    )
-    print("✅ [SNAPSHOT]: Sync completo (Gitea + GitHub inteligente)")
-except Exception as e:
-    print(f"⚠️ [SNAPSHOT]: Error en sync: {e}")
+def ejecutar_ciclo_reyna(vid, score=0, adn_hex=""):
+    # 1. Llamada vinculante al Transmutador (Usa la lógica de lbh_tiktok_transmuter)
+    print(f"🐜 DESPERTANDO ENJAMBRE SOBERANO PARA: {vid}")
     
     # Inicialización de Agentes
     h1 = HormigaH1Descargadora(); h2 = HormigaH2Marketing(); h3 = HormigaH3Inversion()
     h5 = HormigaH5Salud(); h6 = HormigaH6Seguridad(); h7 = HormigaH7Reporter()
 
-    print(f"🐜 DESPERTANDO ENJAMBRE SOBERANO PARA: {vid}")
-    
     # Ejecución en Cascada
     d1 = h1.gestionar_assets(vid)
     d2 = h2.analizar_viralidad(vid)
     d3 = h3.calcular_costos()
-    
+
     # Generar Documentos Base
     with open(CONTRACT_PATH, "w") as f:
         json.dump({"vid": vid, "mkt": d2, "inv": d3, "ts": str(datetime.now())}, f)
+    
     with open(REPORT_PATH, "w") as f:
         f.write(f"# Informe de Inteligencia LBH\nVideo: {vid}\nROI Est: {d2['roi_potencial']}\nCosto Ops: {d3['costo_operativo_usd']}")
 
     # Seguridad y Salud
     status_h5 = h5.ejecutar_chequeo(DB_PATH)
     sello_h6 = h6.sellar_evidencia([CONTRACT_PATH, REPORT_PATH])
-    
+
     # Consolidación H7
     payload_final = {
-        "video_id": vid, "timestamp": str(datetime.now()),
-        "marketing": d2, "finanzas": d3, "salud": status_h5, "sello": sello_h6,
+        "video_id": vid, 
+        "timestamp": str(datetime.now()),
+        "marketing": d2, 
+        "finanzas": d3, 
+        "salud": status_h5, 
+        "sello": sello_h6,
         "nodo": NODE_ORIGIN
     }
     h7.consolidar_dashboard(payload_final)
 
     # Snapshot Final
     snapshot_soberania(vid, payload_final)
+
+if __name__ == "__main__":
+    import sys
+    ID_MISION = sys.argv[1] if len(sys.argv) > 1 else "VIRAL_TEST_A16"
+    SCORE     = int(sys.argv[2]) if len(sys.argv) > 2 else 0
+    ADN_HEX   = sys.argv[3] if len(sys.argv) > 3 else ""
+    ejecutar_ciclo_reyna(ID_MISION, score=SCORE, adn_hex=ADN_HEX)

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HormigasAIS | Dashboard Estética</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #1a1a1a;
+            --text-main: #e0e0e0;
+            --accent-gold: #d4af37;
+            --accent-pink: #ff69b4;
+            --status-ok: #2ecc71;
+            --status-warn: #f1c40f;
+            --status-alert: #e74c3c;
+        }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent-gold); }
+        .status-badge {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--status-ok);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--status-ok);
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid var(--accent-gold);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .card h2 { margin-top: 0; font-size: 1.1rem; color: var(--accent-gold); }
+        .stat-line {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #333;
+        }
+        .alert-box {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--status-alert);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+        button {
+            width: 100%; padding: 12px; margin-top: 15px; border-radius: 8px; border: none;
+            background-color: var(--accent-gold); color: black; font-weight: bold; cursor: pointer;
+        }
+        .btn-secondary { background-color: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold); }
+        footer { margin-top: 30px; text-align: center; font-size: 0.8rem; color: #555; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">🐜 HormigasAIS | Nodo A16</div>
+    <div class="status-badge">Colonia Activa - San Miguel</div>
+</header>
+<div class="grid-container">
+    <div class="card">
+        <h2>📅 Agenda (Mensajera)</h2>
+        <div class="stat-line"><span>Próxima Cita:</span> <strong>14:30 - Balayage</strong></div>
+        <div class="stat-line"><span>Pendientes:</span> <strong style="color:var(--status-warn)">3 por confirmar</strong></div>
+        <button>Ver Agenda</button>
+    </div>
+    <div class="card" style="border-left-color: var(--accent-pink);">
+        <h2>🧪 Insumos (Exploradora)</h2>
+        <div class="stat-line"><span>Peróxido 20 Vol:</span> <strong style="color:var(--status-alert)">15%</strong></div>
+        <div class="alert-box">⚠️ H3 recomienda reabastecer Peróxido.</div>
+        <button style="background-color: var(--accent-pink);">Pedido Automático</button>
+    </div>
+    <div class="card">
+        <h2>🚀 Radar (Reyna)</h2>
+        <div class="stat-line"><span>TikTok Viral:</span> <strong>1.2k vistas</strong></div>
+        <button class="btn-secondary">Misión Viral</button>
+    </div>
+    <div class="card">
+        <h2>💰 Caja (Carga)</h2>
+        <div class="stat-line"><span>Ingresos Hoy:</span> <strong style="color:var(--status-ok)">$245.00</strong></div>
+        <p style="font-size: 0.75rem; color: #777;">🔒 Datos Soberanos LBH</p>
+    </div>
+</div>
+<footer>
+    Desarrollado por Cristhiam Quiñonez | San Miguel, El Salvador
+</footer>
+</body>
+</html>
