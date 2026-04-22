@@ -1,79 +1,64 @@
 #!/usr/bin/env python3
-# ================================================================
-# 🧬 HORMIGASAIS · H9 ORQUESTADOR SOBERANO v2.0
-# Cerebro Autónomo del Enjambre · Nodo A16
-# ================================================================
-
-import os, subprocess, requests, re, sys
-
-NODE = "A16-SanMiguel-SV"
-
-def expandir_url(url):
-    try:
-        r = requests.get(url, allow_redirects=True, timeout=10)
-        return r.url
-    except:
-        return url
+import os, sys, json, re, hashlib
+from datetime import datetime
 
 def extraer_video_id(url):
-    url = expandir_url(url)
-    patrones = [r"video/(\d+)", r"(\d{10,20})"]
-    for p in patrones:
-        m = re.search(p, url)
-        if m: return m.group(1)
-    return url.split("/")[-1].split("?")[0]
+    match = re.search(r"video/(\d+)", url)
+    if not match:
+        match = re.search(r"com/(\w+)", url)
+    return match.group(1) if match else "ID_DESCONOCIDO"
 
-def ejecutar_mision(url, metrics):
-    video_id = extraer_video_id(url)
-    print(f"\n🐜 H9 ACTIVANDO MISIÓN PARA: {video_id}")
-
-    script = os.path.expanduser("~/lbh-tiktok-adapter/src/lbh_misión_viral.py")
-
-    # FLUJO DE ENTRADA AUTOMÁTICO PARA lbh_misión_viral.py
-    # [URL] -> [Opción 2: Completa] -> [Métricas] -> [s: Confirmar]
-    input_data = "\n".join([
-        url,
-        "2", 
-        str(metrics["views"]),
-        str(metrics["likes"]),
-        str(metrics["comments"]),
-        str(metrics["saves"]),
-        str(metrics["shares"]),
-        str(metrics["purchases"]),
-        "s"
-    ]) + "\n"
-
-    try:
-        subprocess.run(
-            ["python3", script],
-            input=input_data,
-            text=True
-        )
-        print(f"✅ Misión {video_id} procesada por el Enjambre")
-    except Exception as e:
-        print(f"❌ Error H9: {e}")
-
-def main():
-    print("🧬 H9 ORQUESTADOR SOBERANO ONLINE")
-    print(f"Nodo: {NODE}\n")
-
+def ejecutar_mision():
     if len(sys.argv) < 2:
-        print("⚠️ Uso: python3 lbh_h9_orquestador.py <url>")
+        print("⚠️ Error: No se recibió URL")
         return
 
     url = sys.argv[1]
+    video_id = extraer_video_id(url)
     
-    # Simulación de captura de métricas (Próximamente vía API/Scraper)
-    metrics = {
-        "views": 583, "likes": 27, "comments": 0,
-        "saves": 0, "shares": 0, "purchases": 0
+    print(f"\n🚀 Misión para Video: {video_id}")
+    print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    
+    # ENTRADA DINÁMICA (Aquí es donde servimos el agua limpia)
+    try:
+        metricas = {
+            "views":     int(input("👁️  Vistas:    ") or 0),
+            "likes":     int(input("❤️  Likes:     ") or 0),
+            "comments":  int(input("💬  Comms:     ") or 0),
+            "saves":     int(input("🔖  Saves:     ") or 0),
+            "shares":    int(input("↗️  Shares:    ") or 0),
+            "purchases": int(input("💰  Compras:   ") or 0)
+        }
+    except ValueError:
+        print("❌ Error: Debes ingresar números enteros.")
+        return
+
+    # Cálculo de Score LBH
+    score = (metricas["likes"] * 2) + (metricas["comments"] * 5) + (metricas["purchases"] * 50)
+    
+    # Generar ADN Determinístico
+    adn_base = f"LBH-{video_id}-{score}-{datetime.now().strftime('%Y%m%d')}"
+    adn_hex = hashlib.sha256(adn_base.encode()).hexdigest()[:16]
+
+    # Guardar Evidencia para H10
+    evidencia = {
+        "video_id": video_id,
+        "url": url,
+        "score": score,
+        "adn": adn_hex,
+        "metricas": metricas,
+        "timestamp": str(datetime.now())
     }
+    
+    path_evidencia = os.path.expanduser(f"~/lbh-tiktok-adapter/evidence/{video_id}.json")
+    os.makedirs(os.path.dirname(path_evidencia), exist_ok=True)
+    
+    with open(path_evidencia, "w") as f:
+        json.dump(evidencia, f, indent=4)
 
-    print(f"🔗 URL TikTok: {url}")
-    print("\n📊 Métricas cargadas automáticamente:")
-    for k, v in metrics.items(): print(f"  {k}: {v}")
-
-    ejecutar_mision(url, metrics)
+    print(f"\n✅ Misión Finalizada")
+    print(f"🧬 ADN: {adn_hex}")
+    print(f"📊 Score: {score}")
 
 if __name__ == "__main__":
-    main()
+    ejecutar_mision()

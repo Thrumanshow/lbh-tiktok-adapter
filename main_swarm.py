@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # ================================================================
 # HORMIGASAIS · LBH-TikTok Adapter v2.0
 # Orquestador Swarm con metricas reales + colonia A16
@@ -109,7 +110,7 @@ def modo_manual(video_id, score):
     swarm = ViralSwarm()
     hex_signal = swarm.generate_viral_pheromone(video_id, score)
 
-    print(f"" + chr(10) + "🧬 Generando ADN LBH: {hex_signal}")
+    print(f"" + chr(10) + f"🧬 Generando ADN LBH: {hex_signal}")
     print(f"📊 Categoria: [{categoria}] | Score: {score}")
 
     ingestar_feromona(video_id, hex_signal, tipo_evento=tipo_evento)
@@ -158,7 +159,7 @@ def modo_interactivo():
     try:
         video_input = input("🔗 URL o ID del Video TikTok: ").strip()
         if not video_input:
-            print("❌ Error: Se requiere un objetivo.")
+    # Línea saneada
             return
 
         video_id = extraer_video_id(video_input)
@@ -180,9 +181,8 @@ def modo_interactivo():
 
         print("" + chr(10) + "─"*40)
         input("⌨️  Presiona Enter para activar el primer Worker...")
-
-        tarea = reclamar_accion(f"nodo-{NODE_ORIGIN}-worker-01")
-        if tarea:
+        if not video_input:
+            return
             tipos = {2: "VIRAL 🔥", 1: "TRENDING 📈", 0: "GROWING 🌱", 3: "MEGAVIRAL 🚀"}
             tipo_label = tipos.get(tarea.get("tipo", 0), "UNKNOWN")
             print(f"" + chr(10) + "✅ [TRABAJO RECLAMADO]")
@@ -208,8 +208,7 @@ def modo_interactivo():
     except KeyboardInterrupt:
         print("" + chr(10) + "" + chr(10) + "👋 Operación cancelada.")
     except Exception as e:
-        print(f"" + chr(10) + "❌ Error en el protocolo: {e}")
-        import traceback; traceback.print_exc()
+        print(f"❌ Error en enjambre: {e}")
 
 if __name__ == "__main__":
     modo_interactivo()

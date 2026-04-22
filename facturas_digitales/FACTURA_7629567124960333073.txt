@@ -1,0 +1,11 @@
+--- HORMIGASAIS S.A. DE C.V. (PROYECTO) ---
+NODO EMISOR: A16-SanMiguel-SV
+FECHA: 2026-04-17 00:30:58
+ID TRANSACCION: 61312e816fd65ae2
+------------------------------------------
+SERVICIO: Analisis de Inteligencia LBH
+SUBTOTAL: $0.15
+IVA (13%): $0.0195
+TOTAL A PAGAR: $0.15
+------------------------------------------
+Soberania de Datos Garantizada por LBH-RFC-0006

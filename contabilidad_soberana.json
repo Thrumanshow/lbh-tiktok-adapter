@@ -1,2 +1,11 @@
 {"fecha": "2026-04-16 19:59:05", "video_id": "7629099113950268688", "cliente_nodo": "A16-SanMiguel-SV", "sello_fiscal_lbh": "9a8467d126c6c97e", "moneda": "USD", "detalles": {"ingreso_bruto": 0.15, "iva_retenido": 0.0195, "costo_operativo": 0.004, "utilidad_neta": 0.1265}, "estado": "FACTURADO_SOPORTE_DIGITAL"}
 {"fecha": "2026-04-16 20:25:17", "video_id": "7629099113950268688", "cliente_nodo": "A16-SanMiguel-SV", "sello_fiscal_lbh": "9a8467d126c6c97e", "moneda": "USD", "detalles": {"ingreso_bruto": 0.15, "iva_retenido": 0.0195, "costo_operativo": 0.004, "utilidad_neta": 0.1265}, "estado": "FACTURADO_SOPORTE_DIGITAL"}
+{"fecha": "2026-04-17 00:30:58", "video_id": "7629567124960333073", "cliente_nodo": "A16-SanMiguel-SV", "sello_fiscal_lbh": "61312e816fd65ae2", "moneda": "USD", "detalles": {"ingreso_bruto": 0.15, "iva_retenido": 0.0195, "costo_operativo": 0.004, "utilidad_neta": 0.1265}, "estado": "FACTURADO_SOPORTE_DIGITAL"}
+{"fecha": "2026-04-17 00:30:58", "video_id": "7629567124960333073", "cliente_nodo": "A16-SanMiguel-SV", "sello_fiscal_lbh": "61312e816fd65ae2", "moneda": "USD", "detalles": {"ingreso_bruto": 0.15, "iva_retenido": 0.0195, "costo_operativo": 0.004, "utilidad_neta": 0.1265}, "estado": "FACTURADO_SOPORTE_DIGITAL"}
+{"timestamp": "2026-04-17 01:05:59.204233", "video_id": "ZSHva7wnT", "detalles": {"ingreso_bruto": 1.0, "utilidad_neta": 0.1265}, "adn": "9be43511d3a0f7de"}
+{"timestamp": "2026-04-17 01:06:16.911641", "video_id": "ZSHva7wnT", "detalles": {"ingreso_bruto": 1.0, "utilidad_neta": 0.1265}, "adn": "9be43511d3a0f7de"}
+{"timestamp": "2026-04-17 01:23:14.768658", "video_id": "ZSHva7wnT", "detalles": {"ingreso_bruto": 1.0, "utilidad_neta": 0.1265}, "adn": "9be43511d3a0f7de"}
+{"timestamp": "2026-04-17 22:55:52.613956", "video_id": "ZSH3qrJ8W", "detalles": {"ingreso_bruto": 1.0, "utilidad_neta": 0.1265}, "adn": "062674ca89bc18f5"}
+{"timestamp": "2026-04-18 00:00:43.280187", "video_id": "ZSH3qrJ8W", "detalles": {"ingreso_bruto": 1.0, "utilidad_neta": 0.1265}, "adn": "062674ca89bc18f5"}
+{"timestamp": "2026-04-18 00:08:29.705838", "video_id": "ZSH3qrJ8W", "detalles": {"ingreso_bruto": 1.0, "utilidad_neta": 0.1265}, "adn": "062674ca89bc18f5"}
+{"timestamp": "2026-04-18 01:04:49.659337", "video_id": "ZSH3qrJ8W", "detalles": {"ingreso_bruto": 1.0, "utilidad_neta": 0.1265}, "adn": "062674ca89bc18f5"}
